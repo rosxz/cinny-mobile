@@ -17,9 +17,10 @@
   in {
 
     devShells.${system}.default = nixpkgs.legacyPackages.${system}.mkShell {
-      # Minimal buildInputs — avoid pulling many deps into the environment.
-      buildInputs = [ pkgs.nodejs_20 pkgs.android-studio pkgs.steam-run ];
-
+      buildInputs = [ pkgs.nodejs_22 pkgs.android-studio pkgs.steam-run pkgs.openjdk17 ];
+      # TODO linkage for gradle
+      # TODO use androidsdk instead of android-studio
+      JAVA_HOME = pkgs.openjdk17;
       CAPACITOR_ANDROID_STUDIO_PATH = "${pkgs.android-studio}/bin/android-studio";
     };
     packages.${system}.default = self.packages.${system}.hello;
